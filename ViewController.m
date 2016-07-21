@@ -7,14 +7,17 @@
 //
 
 #import "ViewController.h"
+#import "SliderViewController.h"
+#import "FirstViewController.h"
+#import "SecondViewController.h"
+#import "ThiredViewController.h"
+#import "FourViewController.h"
+#import "FiveViewController.h"
+#import "SixViewController.h"
+#import "SevenViewController.h"
 
-#define watchW 200
-#define per
 @interface ViewController ()
 
-@property (nonatomic,strong)UIImageView * watch;
-
-@property (nonatomic,strong)CALayer * second;
 
 @end
 
@@ -23,42 +26,33 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
    
-    _watch = [[UIImageView alloc]initWithFrame:CGRectMake(100, 100, watchW, watchW)];
-    _watch.backgroundColor = [UIColor yellowColor];
-    _watch.layer.cornerRadius = watchW/2;
-    [self.view addSubview:_watch];
- 
-    // 添加分钟
-    [self addSeconds];
+    FirstViewController * first = [[FirstViewController alloc]init];
+    first.title = @"推荐";
+    SecondViewController * second = [[SecondViewController alloc]init];
+    second.title = @"房产";
+    ThiredViewController * third = [[ThiredViewController alloc]init];
+    third.title = @"美女";
+    FourViewController * four = [[FourViewController alloc]init];
+    four.title = @"极限";
+    FiveViewController * five = [[FiveViewController alloc]init];
+    five.title = @"房产";
+    SixViewController * six = [[SixViewController alloc]init];
+    six.title = @"美女";
+    SevenViewController * seven = [[SevenViewController alloc]init];
+    seven.title = @"极限";
     
+    NSArray * subViewController = @[first,second,third,four,five,six,seven];
     
-
-    // 自动启动
-    [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(updateTimer) userInfo:nil repeats:YES];
-    
-     [self updateTimer];
+    SliderViewController * sliderVC = [[SliderViewController alloc]initWithSubViewControllers:subViewController];
+    sliderVC.view.frame = CGRectMake(0, 64, self.view.frame.size.width, self.view.frame.size.height);
+    [self.view addSubview:sliderVC.view];
+    [self addChildViewController:sliderVC];
+    self.title = @"首页";
 }
 
-- (void)updateTimer
-{
-    // 获取当前的日历
-    NSCalendar * calendar = [NSCalendar currentCalendar];
-    NSDateComponents * dateComp = [calendar components:(NSCalendarUnitHour|NSCalendarUnitMinute|NSCalendarUnitSecond) fromDate:[NSDate date]];
-    CGFloat seconds = dateComp.second;
-    CGFloat angle = seconds*6;
-    CGFloat radian = angle/180*M_PI;
-    _second.transform = CATransform3DMakeRotation(radian, 0, 0, 1);
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
-
-- (void)addSeconds
-{
-    _second = [CALayer layer];
-    _second.position = CGPointMake(watchW/2, watchW/2);
-    _second.anchorPoint = CGPointMake(0.5, 1);
-    _second.bounds = CGRectMake(0, 0, 1, watchW/2-20);
-    _second.backgroundColor = [UIColor redColor].CGColor;
-    [_watch.layer addSublayer:_second];
-}
-
 
 @end
