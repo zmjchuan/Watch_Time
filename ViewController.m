@@ -47,8 +47,32 @@
     sliderVC.view.frame = CGRectMake(0, 64, self.view.frame.size.width, self.view.frame.size.height);
     [self.view addSubview:sliderVC.view];
     [self addChildViewController:sliderVC];
-    self.title = @"首页";
+  
+    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
+    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"LOGO" style:(UIBarButtonItemStyleDone) target:nil action:nil];
+    
+    UIBarButtonItem * addBtn = [[UIBarButtonItem alloc]initWithTitle:@"添加" style:(UIBarButtonItemStyleDone) target:self action:@selector(addClick)];
+    UIBarButtonItem * downLoadBtn = [[UIBarButtonItem alloc]initWithTitle:@"下载" style:(UIBarButtonItemStyleDone) target:self action:@selector(downLoadBtnClick)];
+    UIBarButtonItem * historyBtn = [[UIBarButtonItem alloc]initWithTitle:@"历史" style:(UIBarButtonItemStyleDone) target:self action:@selector(historyBtnClick)];
+    self.navigationItem.rightBarButtonItems = @[addBtn,downLoadBtn,historyBtn];
 }
+
+-(void)addClick
+{
+    NSLog(@"添加");
+}
+
+-(void)downLoadBtnClick
+{
+     NSLog(@"下载");
+}
+
+-(void)historyBtnClick
+{
+     NSLog(@"历史");
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

@@ -58,7 +58,7 @@
     NSInteger count = _VCArr.count;
     
     UIScrollView * scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, DCScreenW, 44)];
-    scrollView.backgroundColor = [UIColor yellowColor];
+//    scrollView.backgroundColor = [UIColor yellowColor];
     self.topBar = scrollView;
     self.topBar.bounces = NO;
     [self.view addSubview:self.topBar];
@@ -73,6 +73,7 @@
         [btn setTitleColor:[UIColor redColor] forState:(UIControlStateSelected)];
         [btn setTitle:vc.title forState:(UIControlStateNormal)];
         [btn addTarget:self action:@selector(click:) forControlEvents:(UIControlEventTouchUpInside)];
+        [btn.titleLabel setFont:[UIFont fontWithName:@"CourierNewPS-ItalicMT" size:14]];
         [self.topBar addSubview:btn];
         if (i == 0) {
             btn.selected = YES;

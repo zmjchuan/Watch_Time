@@ -7,8 +7,8 @@
 //
 
 #import "AppDelegate.h"
-#import "ViewController.h"
-
+#import "TabBarViewController.h"
+                                                    
 @interface AppDelegate ()
 
 @end
@@ -20,9 +20,12 @@
     self.window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
-    ViewController *vc = [[ViewController alloc]init];
-    UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:vc];
-    self.window.rootViewController = nav;
+    TabBarViewController *tabBar = [[TabBarViewController alloc]init];
+//    UINavigationController *navigation = [[UINavigationController alloc]initWithRootViewController:tabBar];
+//   
+//    [navigation.navigationBar setTintColor:[UIColor blackColor]];
+//    [navigation.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
+    self.window.rootViewController = tabBar;
     return YES;
 }
 
