@@ -1,22 +1,28 @@
 //
-//  CSCViewController.m
+//  FirstViewController.m
 //  Watch_Time
 //
-//  Created by mac on 16/7/22.
+//  Created by mac on 16/7/20.
 //  Copyright © 2016年 mac. All rights reserved.
 //
 
-#import "CSCViewController.h"
+#import "FirstViewController.h"
+#import "HttpsUtil.h"
 
-@interface CSCViewController ()
+@interface FirstViewController ()
 
 @end
 
-@implementation CSCViewController
+@implementation FirstViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    
+    self.view.backgroundColor = [UIColor whiteColor];
+    
+   
+    
 }
 
 - (void)didReceiveMemoryWarning {
