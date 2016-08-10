@@ -1,22 +1,24 @@
 //
-//  FirstViewController.m
+//  DownloadViewController.m
 //  Watch_Time
 //
-//  Created by mac on 16/7/20.
+//  Created by mac on 16/8/10.
 //  Copyright © 2016年 mac. All rights reserved.
 //
 
-#import "FirstViewController.h"
+#import "DownloadViewController.h"
 
-@interface FirstViewController ()
+@interface DownloadViewController ()
 
 @end
 
-@implementation FirstViewController
+@implementation DownloadViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor blueColor];
+  
+    self.navigationItem.title = @"下载";
+    self.view.backgroundColor = [UIColor whiteColor];
 }
 
 - (void)didReceiveMemoryWarning {
