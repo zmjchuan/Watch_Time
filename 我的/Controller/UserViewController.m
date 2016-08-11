@@ -34,23 +34,26 @@
     [self.navigationController setNavigationBarHidden:YES];
     [self addTabelView];
     
+    // 下拉放大效果
 //    [self addHeadImageViewForZoom];
     
+    // 下拉没有效果
     [self addHeadImageViewForNormal];
 }
 
-#pragma mark -- 添加tableView
+#pragma mark ---------------- 添加tableView
 - (void)addTabelView
 {
     self.tableView = [[UITableView alloc]initWithFrame:self.view.bounds style:(UITableViewStylePlain)];
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"CELL"];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    self.tableView.showsVerticalScrollIndicator = NO;
     [self.view addSubview:self.tableView];
 
 }
 
-#pragma  mark -- 下拉放大效果
+#pragma  mark ---------------- 下拉放大效果
 - (void)addHeadImageViewForZoom
 {
     // 设置内边距之后，tableView的原点在（0，kContentSizeH*0.8）的位置
@@ -78,7 +81,7 @@
 }
 
 
-#pragma mark -- 正常的720效果
+#pragma mark ---------------- 下拉没有效果
 - (void)addHeadImageViewForNormal
 {
     // 设置内边距之后，tableView的原点在（0，kContentSizeH*0.8）的位置
@@ -112,7 +115,7 @@
     [headView addSubview:self.addHeadImageBtn];
 }
 
-#pragma mark -- 调用相册相机添加头像事件
+#pragma mark --  添加头像Action
 - (void)addHeadImagePhoto
 {
     [TakePicker sharePickerBlock:^(UIImage *image) {
@@ -164,7 +167,7 @@
     }*/
 }
 
-#pragma mark - image picker delegte
+#pragma mark ---------------- image picker delegte
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
@@ -181,7 +184,7 @@
 
 
 
-#pragma mark -- dataSource && delegete
+#pragma mark ---------------- dataSource && delegete
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return 10;

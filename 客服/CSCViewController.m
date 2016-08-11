@@ -7,7 +7,8 @@
 //
 
 #import "CSCViewController.h"
-
+#import "Reachability.h"
+#import "HttpsUtil.h"
 
 #define kWScreen self.view.frame.size.width
 #define kHScreen self.view.frame.size.height
@@ -18,7 +19,7 @@
 #define kContentSizeHForNormal 200
 
 @interface CSCViewController ()
-
+@property (nonatomic, strong)Reachability * reachability;
 @end
 
 @implementation CSCViewController
@@ -26,11 +27,61 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    // 检测网络状态改变
+    // [self p_addNetworkNotoficate];
     
+    // 图片手势交互
+    // [self p_addHeadView];
+    
+    // alert弹窗
+    // [self p_addAlertView];
+
+}
+
+#pragma mark -------3------- 检测网络状态改变
+- (void)p_addNetworkNotoficate
+{
+    // 监听网络
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(networkStateChange) name:kReachabilityChangedNotification object:nil];
+    
+    //获得Reachability对象
+    self.reachability = [Reachability reachabilityForInternetConnection];
+    // 开始监听网络
+    [self.reachability startNotifier];
+}
+
+- (void)networkStateChange
+{
+    NSLog(@"网络状态改变了");
+    [self checkNetworkState];
+}
+
+-(void)dealloc
+{
+    [self.reachability stopNotifier];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+// 监测网络状态
+- (void)checkNetworkState
+{
+    if ([HttpsUtil checkNetworkState] == UseWifi) {
+        NSLog(@"WIFI");
+    } else if ([HttpsUtil checkNetworkState] == UseNet) {
+        NSLog(@"手机自带网络");
+    } else {
+        NSLog(@"没有网络");
+    }
+}
+
+
+
+#pragma mark -------2------- 图片手势交互
+- (void)p_addHeadView
+{
     UIView * headView = [[UIView alloc]initWithFrame:CGRectMake(0, 64, kWScreen, kContentSizeHForNormal)];
     [self.view insertSubview:headView atIndex:0];
     
-
     UIImageView * imageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"dog"]];
     imageView.frame = CGRectMake(0, 0, kWScreen, kContentSizeHForNormal);
     imageView.contentMode = UIViewContentModeScaleAspectFill;
@@ -40,16 +91,16 @@
     
     UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(addHeadImageTap)];
     [imageView addGestureRecognizer:tap];
-
 }
 
 - (void)addHeadImageTap
 {
-    NSLog(@"'tap");
+    NSLog(@"tap");
 }
 
 
-- (void)addAlertView
+#pragma mark -------1------- alert弹窗
+- (void)p_addAlertView
 {
     UIAlertController * alterCon2 = [UIAlertController alertControllerWithTitle:@"警告" message:@"你确定要这样做吗？" preferredStyle:(UIAlertControllerStyleAlert)];
     
@@ -82,29 +133,5 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-//@interface ViewController ()<UIPopoverPresentationControllerDelegate, UIAdaptivePresentationControllerDelegate>
-//@end
-//@implementation ViewController
-//
-//- (void)viewDidLoad {    [super viewDidLoad];}
-//
-//- (IBAction)show:(id)sender
-//{    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-//    TestViewController *contentViewController = [storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([TestViewController class])];
-//    contentViewController.modalPresentationStyle. = UIModalPresentationPopover;
-//    UIPopoverPresentationController *detailPopover = contentViewController.popoverPresentationController;
-//    detailPopover.delegate = self;
-//    detailPopover.barButtonItem = sender;
-//    detailPopover.permittedArrowDirections = UIPopoverArrowDirectionAny;
-//    [self presentViewController:contentViewController animated:YES completion:nil];}
-//
-//- (UIModalPresentationStyle)adaptivePresentationStyleForPresentationController:(UIPresentationController *)controller
-//{    return UIModalPresentationNone;}
-//
-//- (UIViewController *)presentationController:(UIPresentationController *)controller viewControllerForAdaptivePresentationStyle:(UIModalPresentationStyle)style
-//{    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:controller.presentedViewController];
-//    return navController;
-//}
 
 @end
