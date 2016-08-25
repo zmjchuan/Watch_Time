@@ -9,6 +9,8 @@
 #import "CSCViewController.h"
 #import "Reachability.h"
 #import "HttpsUtil.h"
+#import "NextViewController.h"
+
 
 #define kWScreen self.view.frame.size.width
 #define kHScreen self.view.frame.size.height
@@ -31,12 +33,19 @@
     // [self p_addNetworkNotoficate];
     
     // 图片手势交互
-    // [self p_addHeadView];
+     [self p_addHeadView];
     
     // alert弹窗
-    // [self p_addAlertView];
+//     [self p_addAlertView];
 
 }
+
+#pragma mark -------4------- 表格
+- (void)p_addList
+{
+    
+}
+
 
 #pragma mark -------3------- 检测网络状态改变
 - (void)p_addNetworkNotoficate
@@ -96,6 +105,11 @@
 - (void)addHeadImageTap
 {
     NSLog(@"tap");
+    NextViewController * next = [[NextViewController alloc]init];
+    self.hidesBottomBarWhenPushed = YES;
+    self.tabBarController.tabBar.hidden = YES;
+    [self.navigationController pushViewController:next animated:YES];
+    self.hidesBottomBarWhenPushed = NO;
 }
 
 
@@ -122,6 +136,7 @@
     // 确认按钮
     UIAlertAction * okAction = [UIAlertAction actionWithTitle:@"确认" style:(UIAlertActionStyleDestructive) handler:^(UIAlertAction *action) {
         
+       
     }];
     
     [alterCon2 addAction:cancel];

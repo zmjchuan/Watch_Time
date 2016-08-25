@@ -9,6 +9,8 @@
 #import "UserViewController.h"
 #import "TakePicker.h"
 #import "SavePicture.h"
+#import "VedioPlayerViewController.h"
+
 
 #define kWScreen self.view.frame.size.width
 #define kHScreen self.view.frame.size.height
@@ -19,6 +21,9 @@
 #define kContentSizeHForNormal 200
 
 @interface UserViewController ()<UITableViewDelegate,UITableViewDataSource,UINavigationControllerDelegate,UIImagePickerControllerDelegate>
+{
+    UITableViewCellEditingStyle _style;
+}
 
 @property (nonatomic,strong)UITableView * tableView;
 
@@ -29,9 +34,15 @@
 
 @implementation UserViewController
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:YES];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.navigationController setNavigationBarHidden:YES];
+    
     [self addTabelView];
     
     // 下拉放大效果
@@ -88,6 +99,7 @@
     self.tableView.contentInset = UIEdgeInsetsMake(kContentSizeHForNormal-20, 0, 0, 0);
     
     UIView * headView = [[UIView alloc]initWithFrame:CGRectMake(0, -kContentSizeHForNormal, kWScreen, kContentSizeHForNormal)];
+    
     [self.tableView insertSubview:headView atIndex:0];
     
     UIImageView * imageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"pic.jpg"]];
@@ -193,12 +205,69 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"CELL" forIndexPath:indexPath];
-    
+   
     cell.textLabel.text = [NSString stringWithFormat:@"测试数据<-->%ld",indexPath.row];
    
     return cell;
 }
 
+// - 点击tableView
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if(indexPath.row == 0)
+    {
+        VedioPlayerViewController * vedioPlayer = [[VedioPlayerViewController alloc]init];
+        self.hidesBottomBarWhenPushed = YES;
+//        self.tabBarController.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:vedioPlayer animated:YES];
+        self.hidesBottomBarWhenPushed  = NO;
+        
+    } else {
+        NSLog(@"Not first");
+    }
+}
+
+// cell手势滑动
+- (NSArray<UITableViewRowAction *> *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+//    UITableViewRowAction *deleteRowAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive title:@"删除" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
+//        
+//        [self.deleteData removeObjectAtIndex:indexPath.row];
+//        
+//        [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+//        
+//    }];
+    
+    UITableViewRowAction *topRowAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"教师" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
+        
+//        [self.deleteData exchangeObjectAtIndex:indexPath.row withObjectAtIndex:0];
+//        
+//        NSIndexPath *firstIndexPath = [NSIndexPath indexPathForRow:0 inSection:indexPath.section];
+//        
+//        [tableView moveRowAtIndexPath:indexPath toIndexPath:firstIndexPath];
+        
+         NSLog(@"图书");
+        
+    }];
+    
+    topRowAction.backgroundColor = [UIColor blueColor];
+    
+    UITableViewRowAction *moreRowAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:@"图书" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
+        
+        NSLog(@"图书");
+        
+//        [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationMiddle];
+        
+    }];
+   
+    return @[topRowAction,moreRowAction];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [self.navigationController setNavigationBarHidden:NO];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
