@@ -25,7 +25,9 @@
     [super viewDidLoad];
     NSArray * navigationArray = @[@"ViewController",@"CSCViewController",@"UserViewController"];
     NSArray * navigationTitle = @[@"首页",@"客服",@"我的"];
-  _navigationControllArray = [[NSMutableArray alloc]init];
+  
+    _navigationControllArray = [[NSMutableArray alloc]init];
+   
     for (int i = 0; i < navigationArray.count; i++) {
         
         UIViewController *viewController = [[NSClassFromString(navigationArray[i])alloc] init];
