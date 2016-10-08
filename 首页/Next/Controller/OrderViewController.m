@@ -1,37 +1,34 @@
 //
-//  DownloadViewController.m
+//  OrderViewController.m
 //  Watch_Time
 //
-//  Created by mac on 16/8/10.
+//  Created by mac on 16/9/28.
 //  Copyright © 2016年 mac. All rights reserved.
 //
 
-#import "DownloadViewController.h"
-#import "ResourceViewController.h"
+#import "OrderViewController.h"
+#import "ResultViewController.h"
 
-@interface DownloadViewController ()
+@interface OrderViewController ()
 
 @end
 
-@implementation DownloadViewController
+@implementation OrderViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-  
-    self.navigationItem.title = @"资源列表";
+    self.navigationItem.title = @"提交订单(确认支付）";
     self.view.backgroundColor = [UIColor whiteColor];
-    
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc
                                                ]initWithTitle:@"push" style:(UIBarButtonItemStyleDone) target:self action:@selector(pushToVCClick:)];
 }
 
 - (void)pushToVCClick:(UIBarButtonItem *)item
 {
-    ResourceViewController * popVC = [[ResourceViewController alloc]init];
+    ResultViewController * popVC = [[ResultViewController alloc]init];
     
     [self.navigationController pushViewController:popVC animated:YES];
 }
-
 
 
 - (void)didReceiveMemoryWarning {

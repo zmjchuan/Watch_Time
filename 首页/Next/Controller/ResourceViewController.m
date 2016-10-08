@@ -1,36 +1,34 @@
 //
-//  FirstViewController.m
+//  ResourceViewController.m
 //  Watch_Time
 //
-//  Created by mac on 16/7/20.
+//  Created by mac on 16/9/28.
 //  Copyright © 2016年 mac. All rights reserved.
 //
 
-#import "FirstViewController.h"
-#import "HttpsUtil.h"
+#import "ResourceViewController.h"
+#import "OrderViewController.h"
 
-@interface FirstViewController ()
+@interface ResourceViewController ()
 
 @end
 
-@implementation FirstViewController
+@implementation ResourceViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    
+    self.navigationItem.title = @"资源包(购买)";
     self.view.backgroundColor = [UIColor whiteColor];
-   //2
-    NSMutableArray * array = [NSMutableArray array];
-    [array addObject:@"3"];
-//    [array addObject:nil];
-    
-    // 1
-    NSMutableArray * arr = [[NSMutableArray alloc]initWithObjects:@"22",@"33",nil, nil];
-    NSLog(@"ar%@",arr);
-  
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc
+                                               ]initWithTitle:@"push" style:(UIBarButtonItemStyleDone) target:self action:@selector(pushToVCClick:)];
 }
 
+- (void)pushToVCClick:(UIBarButtonItem *)item
+{
+    OrderViewController * popVC = [[OrderViewController alloc]init];
+    
+    [self.navigationController pushViewController:popVC animated:YES];
+}
 
 
 

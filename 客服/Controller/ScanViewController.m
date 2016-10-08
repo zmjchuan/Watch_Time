@@ -1,38 +1,28 @@
 //
-//  FirstViewController.m
+//  ScanViewController.m
 //  Watch_Time
 //
-//  Created by mac on 16/7/20.
+//  Created by mac on 16/9/25.
 //  Copyright © 2016年 mac. All rights reserved.
 //
 
-#import "FirstViewController.h"
-#import "HttpsUtil.h"
+#import "ScanViewController.h"
 
-@interface FirstViewController ()
+@interface ScanViewController ()
 
 @end
 
-@implementation FirstViewController
+@implementation ScanViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    
     self.view.backgroundColor = [UIColor whiteColor];
-   //2
-    NSMutableArray * array = [NSMutableArray array];
-    [array addObject:@"3"];
-//    [array addObject:nil];
     
-    // 1
-    NSMutableArray * arr = [[NSMutableArray alloc]initWithObjects:@"22",@"33",nil, nil];
-    NSLog(@"ar%@",arr);
-  
+    UILabel * lable = [[UILabel alloc]initWithFrame:self.view.bounds];
+    lable.text = _string;
+    lable.textAlignment = NSTextAlignmentCenter;
+    [self.view addSubview:lable];
 }
-
-
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
