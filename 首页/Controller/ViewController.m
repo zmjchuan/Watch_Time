@@ -121,7 +121,7 @@
      NSLog(@"下载");
     DownloadViewController * downloadVC = [[DownloadViewController alloc]init];
     self.tabBarController.tabBar.hidden=YES;
-    self.hidesBottomBarWhenPushed=YES;
+    downloadVC.hidesBottomBarWhenPushed=YES;
     [self.navigationController pushViewController:downloadVC animated:YES];
     self.hidesBottomBarWhenPushed=NO;
 }

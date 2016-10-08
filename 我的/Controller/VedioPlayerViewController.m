@@ -31,6 +31,7 @@
     [self.view addSubview:wmPlayer];
     [wmPlayer.player play];
 }
+
 - (instancetype)init
 {
     self = [super init];
@@ -113,6 +114,8 @@
     }];
 }
 -(void)fullScreenBtnClick:(NSNotification *)notice{
+    
+   
     UIButton *fullScreenBtn = (UIButton *)[notice object];
     if (fullScreenBtn.isSelected) {//全屏显示
         [self toFullScreenWithInterfaceOrientation:UIInterfaceOrientationLandscapeLeft];

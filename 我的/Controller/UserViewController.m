@@ -10,7 +10,9 @@
 #import "TakePicker.h"
 #import "SavePicture.h"
 #import "VedioPlayerViewController.h"
-
+#import "AutoLayoutViewController.h"
+#import "CellHeightViewController.h"
+#import "OrderListViewController.h"
 
 #define kWScreen self.view.frame.size.width
 #define kHScreen self.view.frame.size.height
@@ -30,6 +32,8 @@
 @property (nonatomic,strong)UIImageView * headImageView;
 
 @property (nonatomic,strong)UIButton * addHeadImageBtn;
+
+@property (nonatomic,strong)NSArray * cellDataArray;
 @end
 
 @implementation UserViewController
@@ -45,6 +49,7 @@
     
     [self addTabelView];
     
+    _cellDataArray = @[@"视频播放-Masonry布局",@"演示例子-AutoLayOut布局",@"我的订单",@"cell高度&&宽度自适应"];
     // 下拉放大效果
 //    [self addHeadImageViewForZoom];
     
@@ -199,14 +204,15 @@
 #pragma mark ---------------- dataSource && delegete
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 10;
+    return _cellDataArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"CELL" forIndexPath:indexPath];
    
-    cell.textLabel.text = [NSString stringWithFormat:@"测试数据<-->%ld",indexPath.row];
+
+    cell.textLabel.text = _cellDataArray[indexPath.row];
    
     return cell;
 }
@@ -214,6 +220,7 @@
 // - 点击tableView
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    // 展示了tabbar的隐藏的几种方法
     if(indexPath.row == 0)
     {
         VedioPlayerViewController * vedioPlayer = [[VedioPlayerViewController alloc]init];
@@ -222,8 +229,19 @@
         [self.navigationController pushViewController:vedioPlayer animated:YES];
         self.hidesBottomBarWhenPushed  = NO;
         
+    } else if (indexPath.row == 1) {
+        AutoLayoutViewController * autoLayoutVC = [[AutoLayoutViewController alloc]init];
+        autoLayoutVC.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:autoLayoutVC animated:YES];
+    } else if (indexPath.row == 2){
+        OrderListViewController  * list  = [[OrderListViewController alloc]init];
+        list.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:list animated:YES];
+        
+        
     } else {
-        NSLog(@"Not first");
+        CellHeightViewController * cellVC = [[CellHeightViewController alloc]init];
+        [self.navigationController pushViewController:cellVC animated:YES];
     }
 }
 
@@ -250,7 +268,7 @@
         
     }];
     
-    topRowAction.backgroundColor = [UIColor blueColor];
+    topRowAction.backgroundColor = [UIColor redColor];
     
     UITableViewRowAction *moreRowAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:@"图书" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
         
@@ -259,9 +277,15 @@
 //        [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationMiddle];
         
     }];
-   
+   moreRowAction.backgroundColor = [UIColor yellowColor];
     return @[topRowAction,moreRowAction];
 }
+
+
+//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    return [UIScreen mainScreen].bounds.size.width*0.32;
+//}
 
 - (void)viewWillDisappear:(BOOL)animated
 {
