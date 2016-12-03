@@ -7,6 +7,7 @@
 //
 
 #import "FirstViewController.h"
+#import "HttpsUtil.h"
 
 @interface FirstViewController ()
 
@@ -16,8 +17,22 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor blueColor];
+    
+    
+    self.view.backgroundColor = [UIColor whiteColor];
+   //2
+    NSMutableArray * array = [NSMutableArray array];
+    [array addObject:@"3"];
+//    [array addObject:nil];
+    
+    // 1
+    NSMutableArray * arr = [[NSMutableArray alloc]initWithObjects:@"22",@"33",nil, nil];
+    NSLog(@"ar%@",arr);
+  
 }
+
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

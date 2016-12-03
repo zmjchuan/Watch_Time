@@ -1,23 +1,24 @@
 //
-//  SecondViewController.m
+//  PublishViewController.m
 //  Watch_Time
 //
-//  Created by mac on 16/7/20.
+//  Created by mac on 16/8/10.
 //  Copyright © 2016年 mac. All rights reserved.
 //
 
-#import "SecondViewController.h"
+#import "PublishViewController.h"
 
-@interface SecondViewController ()
+@interface PublishViewController ()
 
 @end
 
-@implementation SecondViewController
+@implementation PublishViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor yellowColor];
-
+    
+    self.navigationItem.title = @"发布作品";
+    self.view.backgroundColor = [UIColor whiteColor];
 }
 
 - (void)didReceiveMemoryWarning {

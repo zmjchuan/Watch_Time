@@ -25,18 +25,27 @@
     [super viewDidLoad];
     NSArray * navigationArray = @[@"ViewController",@"CSCViewController",@"UserViewController"];
     NSArray * navigationTitle = @[@"首页",@"客服",@"我的"];
-  _navigationControllArray = [[NSMutableArray alloc]init];
+  
+    _navigationControllArray = [[NSMutableArray alloc]init];
+   
     for (int i = 0; i < navigationArray.count; i++) {
         
         UIViewController *viewController = [[NSClassFromString(navigationArray[i])alloc] init];
         
         UINavigationController * navigationController = [[UINavigationController alloc]initWithRootViewController:viewController];
+        
+        // push到下一页没有文字
+        [[UIBarButtonItem appearance]setBackButtonTitlePositionAdjustment:(UIOffsetMake(NSIntegerMin, NSIntegerMin)) forBarMetrics:(UIBarMetricsDefault)];
+        // 导航栏上状态栏
+        [navigationController.navigationBar setBarStyle:UIBarStyleBlack];
+        
+        // 导航栏颜色
         [navigationController.navigationBar setBarTintColor:[UIColor blackColor]];
-        //设置上标题栏的内容和颜色
+        // 导航栏的内容
         [viewController.navigationItem setTitle:navigationTitle[i]];
-        //设置返回键颜色
+        // 导航栏返回键颜色
         [navigationController.navigationBar setTintColor:[UIColor whiteColor]];
-        //设置上标题栏颜色
+        // 导航栏title颜色
         [navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
         
         // tabBar默认图片

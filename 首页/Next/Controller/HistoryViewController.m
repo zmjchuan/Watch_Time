@@ -1,23 +1,24 @@
 //
-//  ThiredViewController.m
+//  HistoryViewController.m
 //  Watch_Time
 //
-//  Created by mac on 16/7/20.
+//  Created by mac on 16/8/10.
 //  Copyright © 2016年 mac. All rights reserved.
 //
 
-#import "ThiredViewController.h"
+#import "HistoryViewController.h"
 
-@interface ThiredViewController ()
+@interface HistoryViewController ()
 
 @end
 
-@implementation ThiredViewController
+@implementation HistoryViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor magentaColor];
-
+    
+    self.navigationItem.title = @"最近观看";
+    self.view.backgroundColor = [UIColor whiteColor];
 }
 
 - (void)didReceiveMemoryWarning {

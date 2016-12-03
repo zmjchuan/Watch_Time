@@ -1,22 +1,27 @@
 //
-//  CSCViewController.m
+//  ScanViewController.m
 //  Watch_Time
 //
-//  Created by mac on 16/7/22.
+//  Created by mac on 16/9/25.
 //  Copyright © 2016年 mac. All rights reserved.
 //
 
-#import "CSCViewController.h"
+#import "ScanViewController.h"
 
-@interface CSCViewController ()
+@interface ScanViewController ()
 
 @end
 
-@implementation CSCViewController
+@implementation ScanViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    self.view.backgroundColor = [UIColor whiteColor];
+    
+    UILabel * lable = [[UILabel alloc]initWithFrame:self.view.bounds];
+    lable.text = _string;
+    lable.textAlignment = NSTextAlignmentCenter;
+    [self.view addSubview:lable];
 }
 
 - (void)didReceiveMemoryWarning {
